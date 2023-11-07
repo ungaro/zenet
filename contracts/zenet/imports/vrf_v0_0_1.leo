@@ -2,7 +2,7 @@
 program vrf_v0_0_1.aleo {
 
     // owner contract
-    // aleo166095pymd83g8essrv9wc6hvxp0lwd0gq3ysc5dcy2jxnc9h4s9qma7wj8
+    // aleo18tg2vmkrkz25eudugfyjwanyfnx7zw3tjk5np8pv2qzlzx8xuypqqfeqsg
 
     // TODO: use array when supported. currently it can only support a fixed number of players (4 in this implementation)
 
