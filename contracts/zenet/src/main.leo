@@ -1,10 +1,12 @@
 import zenet_board_v0_0_1.leo;
 //import zenet_bitwise_v0_0_1.leo;
+//import zenet_dice_v0_0_1.leo;
 import zenet_cell_v0_0_1.leo;
 import vrf_v0_0_1.leo;
 
 program zenet.aleo {
 
+    mapping dicerolls: u8 => u8;
 
     // Auxiliary function that returns true if i-th bit of 'number' is '1'
     inline get_bit_inline(number: u32, i: u8) -> bool {
@@ -50,8 +52,56 @@ program zenet.aleo {
     }
 
 
+    transition get_random_bit() -> bool {
+        // Authenticate proposer.
 
 
+        // Return a new record for the proposal.
+        return true
+        then finalize();
+    }
+    // Create a new proposal in the "tickets" mapping.
+    finalize get_random_bit() {
+
+        let current_value: u8 = Mapping::get_or_use(dicerolls, 0u8, 0u8);
+let result:u8 = 0u8;
+
+
+
+      // Update the appropriate entry with the given move.
+        if (ChaCha::rand_bool()==true) {
+           result+=1u8;
+        }
+      // Update the appropriate entry with the given move.
+        if (ChaCha::rand_bool()==true) {
+           result+=1u8;
+        }
+
+      // Update the appropriate entry with the given move.
+        if (ChaCha::rand_bool()==true) {
+           result+=1u8;
+        }
+              // Update the appropriate entry with the given move.
+        if (ChaCha::rand_bool()==true) {
+           result+=1u8;
+        }
+        Mapping::set(dicerolls, 0u8,result);
+    }
+
+
+
+transition roll_dice(player1:u8) -> u8 {
+    
+    //let dice : bool = zenet_dice_v0_0_1.leo/get_random_bit();
+    //return dice;
+return 0u8 then finalize();
+}
+
+ finalize roll_dice() {
+let a:u8 = 0u8 + 1u8;
+       //Mapping::set(tickets, id, 0u64);
+
+ }
     // Creates a new Board record and sets the owner to the caller, which from
     // now on will be known as player 1. It returns two InvisiblePieces records,
     // one for each player. Both are initialized to 0u32 (there are no invisible
@@ -145,34 +195,28 @@ leo run get_random \
 //        let cells: Cells = get_invisible_pieces(board, ip);
 
         let cells: Cells = zenet_cell_v0_0_1.leo/get_cell(8u32,10u32);
-        //let cells: Cells = add_invisible_pieces(board, ip);
 
-
-        // Adds the invisible pieces from the current player to the board to execute the move
-        //let cells: Cells = add_invisible_pieces(board, ip);
-
-        // Validates that the origin cell contains a piece that belongs to the current player.
-
-        // Validates that the dice result is valid according to the rules of the game.
         assert(1u8 <= dice && dice <= 5u8);
-                let target_cell: u8 = origin_cell + dice;
+        let target_cell: u8 = origin_cell + dice;
         let player: u8 = zenet_cell_v0_0_1.leo/get_cell_occupant_external(cells, origin_cell);
         assert(player == 1u8 || player == 2u8);
+
         let target_cell_occupant: u8 = zenet_cell_v0_0_1.leo/get_cell_occupant_external(cells, target_cell);
         assert(target_cell_occupant != player);
+
         let target_empty: bool = target_cell_occupant == 0u8; 
         let protected: bool = zenet_cell_v0_0_1.leo/piece_is_protected(cells, target_cell);
         let valid_move: bool = !target_empty && !protected || target_empty && !protected;
         assert( valid_move );
+
         cells = zenet_cell_v0_0_1.leo/move_or_exchange_piece(cells, origin_cell, target_cell,target_empty);
+        
         let ip_positions: u32 = ip.positions;
 
 
-
-
-      if get_bit_inline(ip_positions, origin_cell) {
-            ip_positions = set_bit_inline(ip_positions, origin_cell, false);
-            ip_positions = set_bit_inline(ip_positions, target_cell, true);
+        if get_bit_inline(ip_positions, origin_cell) {
+                ip_positions = set_bit_inline(ip_positions, origin_cell, false);
+                ip_positions = set_bit_inline(ip_positions, target_cell, true);
         }
 
 
@@ -191,9 +235,7 @@ leo run get_random \
         //    cell_state: 1023u32, // 00 0000000000 0000000000 1111111111
         //    cell_occ: 682u32, // 00 0000000000 0000000000 1010101010
 
-        return ( state,ip_temp
-                   
-                );
+        return ( state,ip_temp);
     }
 
 }

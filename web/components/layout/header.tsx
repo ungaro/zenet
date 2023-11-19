@@ -48,7 +48,6 @@ export default function Header() {
                   </Disclosure.Button>
                 </div>
                 <div className="flex flex-shrink-0 items-center">
-                  <ShieldCheckIcon className="block h-6 w-6 mr-2 text-white" />
                   <p className="font-fahkwang text-white">Zenet</p>
                 </div>
                 <div className="hidden md:ml-6 md:flex md:items-center md:space-x-4">

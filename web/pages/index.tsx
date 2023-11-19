@@ -12,7 +12,8 @@ import { Dialog } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { InboxIcon, TrashIcon, UsersIcon, BugAntIcon, ShieldCheckIcon, CurrencyDollarIcon, AdjustmentsHorizontalIcon, DocumentCheckIcon} from '@heroicons/react/24/outline'
 
-
+import Hero from '../components/hero/hero'
+import Alternate from '../components/alternate/alternate'
 
 
 const features = [
@@ -62,6 +63,9 @@ export default function Home() {
 
   return (
     <>
+
+<Hero/>
+<Alternate/>
      <div style={{backgroundColor:"#e9d3a2"}}>
       
 
