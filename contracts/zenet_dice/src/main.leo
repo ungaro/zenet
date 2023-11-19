@@ -77,7 +77,6 @@ struct DiceArray {
         // remove for debug purposes / add for the real game
         //assert_neq(last_rolls.user, self.caller);  
         
-        // add_last_turn somehow
         assert_eq(last_rolls.game_hash, player.game_hash); // Ensure game hash matches
         assert_neq(last_rolls.game_hash, 0field); // Ensure game hash is not 0
         
